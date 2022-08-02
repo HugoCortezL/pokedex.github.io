@@ -1,4 +1,4 @@
-import {HeaderContainer} from './style'
+import { HeaderContainer } from './style'
 
 export default function Header() {
     return (

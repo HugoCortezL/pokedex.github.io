@@ -7,7 +7,7 @@ import { PokemonView } from '../../model/PokemonView'
 import { getAllPokemons } from '../../API/getPokemons'
 import PokemonCard from '../../components/PokemonCard'
 
-import {useRef} from 'react'
+import { useRef } from 'react'
 
 export default function Home() {
     const [pokemons, setPokemons] = useState<PokemonView[]>([]);
@@ -16,9 +16,9 @@ export default function Home() {
     const listInnerRef = useRef()
 
     const getPokemons = async () => {
-        const pokemonsResult:PokemonView[] = await getAllPokemons(offset)
+        const pokemonsResult: PokemonView[] = await getAllPokemons(offset)
         console.log(pokemonsResult)
-        setPokemons([...pokemons, ...pokemonsResult]) 
+        setPokemons([...pokemons, ...pokemonsResult])
     }
 
     useEffect(() => {
@@ -29,7 +29,7 @@ export default function Home() {
     }, [offset]);
 
     const infiniteScroll = () => {
-        if(listInnerRef.current){
+        if (listInnerRef.current) {
             const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
             if (scrollTop + clientHeight == scrollHeight) {
                 setOffset(offset + 20)

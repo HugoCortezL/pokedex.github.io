@@ -55,7 +55,7 @@ export default function PokemonDetail() {
     return (
         <PokemonDetailContainer>
             <Link to={'/'}>
-                <Header/>
+                <Header />
             </Link>
             <h1>{pokemon.name}</h1>
             <div className="images">

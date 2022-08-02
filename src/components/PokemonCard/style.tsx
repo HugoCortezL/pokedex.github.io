@@ -55,8 +55,6 @@ export const PokemonImage = styled.div<PokemonImageProps>`
     background-size: cover;
     background-position: center center;
     background-color: ${props => props.background ? props.background : "#EAEAEA"}44;
-    //background-color: #eaeaea;
-    //border: 0.5px solid rgba(0,0,0,0.1);
     border-radius: 5px 20px;
     transition: background-image 0.4s;
     &:hover{

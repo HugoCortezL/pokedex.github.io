@@ -1,12 +1,10 @@
-import {TypeCardContainer} from './style'
-import {Generic} from '../../model/Generic'
-import {BackgroundColor} from '../../model/BackgroundColor'
+import { TypeCardContainer } from './style'
+import { Generic } from '../../model/Generic'
+import { BackgroundColor } from '../../model/BackgroundColor'
 
 interface TypeCardProps {
     type: Generic
 }
-
-
 
 enum Color {
     "normal" = "#000000",

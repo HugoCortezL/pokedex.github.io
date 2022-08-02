@@ -108,7 +108,6 @@ export const PokemonDetailContainer = styled.div`
             font-family: 'Roboto';
             flex-wrap: wrap;
             font-size: 20px;
-            
             text-align: center;
             p.number{
                 font-size: 25px;

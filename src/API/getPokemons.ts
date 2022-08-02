@@ -11,15 +11,6 @@ export const getAllPokemons = async (offset = 0) => {
     return pokemons
 }
 
-export const getQtdPokemons = async () => {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1&offset=0')
-        .then(response => response.json())
-        .catch((err) => {
-            console.log(err.message);
-        })
-    return response.count
-}
-
 export const getPokemonByName = async (name: string = "bulbasaur"):Promise<PokemonView> => {
     const pokemon:PokemonView = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
         .then(response => response.json())
