@@ -4,13 +4,16 @@ import { useState, useEffect } from 'react'
 import Header from '../../components/Header'
 
 import { PokemonView } from '../../model/PokemonView'
-import { getAllPokemons, getQtdPokemons } from '../../API/getPokemons'
+import { getAllPokemons } from '../../API/getPokemons'
 import PokemonCard from '../../components/PokemonCard'
+
+import {useRef} from 'react'
 
 export default function Home() {
     const [pokemons, setPokemons] = useState<PokemonView[]>([]);
-    const [qtdPokemons, setQtdPokemons] = useState(0)
     const [offset, setOffset] = useState(0)
+
+    const listInnerRef = useRef()
 
     const getPokemons = async () => {
         const pokemonsResult:PokemonView[] = await getAllPokemons(offset)
@@ -21,24 +24,18 @@ export default function Home() {
     useEffect(() => {
         const setPokemons = async () => {
             await getPokemons()
-            setQtdPokemons( await getQtdPokemons())
         }
         setPokemons()
-        //document.getElementById("see-more")?.addEventListener("scroll", infiniteScroll)
     }, [offset]);
 
-    const handlerSeeMore = (event: Event ) => {
-        event.preventDefault()
-        setOffset(offset + 20)
-    }
-
-    /*const infiniteScroll = () => {
-        /*if (window.innerHeight + document.documentElement.scrollTop
-            === document.documentElement.offsetHeight){
-                console.log("Chgou ao fim")
+    const infiniteScroll = () => {
+        if(listInnerRef.current){
+            const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
+            if (scrollTop + clientHeight == scrollHeight) {
+                setOffset(offset + 20)
             }
-        console.log(listInnerRef.current)
-    }*/
+        }
+    }
 
 
     return (
@@ -48,11 +45,8 @@ export default function Home() {
                 <FilterContainer />
                 <div className="right">
                     <SearchBar />
-                    <PokemonsContainer id="see-more">
+                    <PokemonsContainer id="see-more" ref={listInnerRef} onScroll={infiniteScroll}>
                         {pokemons.map(pokemon => <PokemonCard pokemon={pokemon} key={pokemon.id} />)}
-                        <button onClick={() => handlerSeeMore(event)}>
-                            <PokemonCard/>
-                        </button>
                     </PokemonsContainer>
                 </div>
             </Content>
