@@ -11,7 +11,7 @@ export const PokemonCardContainer = styled.div`
     padding: 30px 10px 10px 10px;
     display: flex;
     flex-direction: column;
-    height: 400px;
+    height: 400px;    
     position: relative;
     box-shadow: 3px 3px 4px 3px rgba(0,0,0,0.2);
     border-radius: 5px 20px;

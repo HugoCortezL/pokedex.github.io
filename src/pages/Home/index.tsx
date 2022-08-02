@@ -1,4 +1,4 @@
-import { HomeContainer, Content, FilterContainer, SearchBar, PokemonsContainer } from './style'
+import { HomeContainer, PokemonsContainer } from './style'
 import { useState, useEffect } from 'react'
 
 import Header from '../../components/Header'
@@ -41,15 +41,9 @@ export default function Home() {
     return (
         <HomeContainer>
             <Header />
-            <Content>
-                <FilterContainer />
-                <div className="right">
-                    <SearchBar />
-                    <PokemonsContainer id="see-more" ref={listInnerRef} onScroll={infiniteScroll}>
-                        {pokemons.map(pokemon => <PokemonCard pokemon={pokemon} key={pokemon.id} />)}
-                    </PokemonsContainer>
-                </div>
-            </Content>
+            <PokemonsContainer id="see-more" ref={listInnerRef} onScroll={infiniteScroll}>
+                {pokemons.map(pokemon => <PokemonCard pokemon={pokemon} key={pokemon.id} />)}
+            </PokemonsContainer>
         </HomeContainer>
     )
 }

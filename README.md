@@ -22,8 +22,8 @@ I created this project to show my skill in fetch API and frontend
 <h2 id="Features">Features 🔥</h2>
 
 * [ ] Responsiveness
-* [ ] Aniamtion
-* [ ] Home Page
+* [X] Aniamtion
+* [X] Home Page
 * [ ] Pokemon detail Page
 * [X] Infinite Scroll at Home Page
 * [ ] Search by name
