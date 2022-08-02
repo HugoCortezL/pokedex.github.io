@@ -22,6 +22,11 @@ const GlobalStyle  = createGlobalStyle`
 
     body {
         font-family: 'PokemonFont';
+        color: #181818;
+    }
+    a{
+        text-decoration: none;
+        color: #181818;
     }
 `;
 

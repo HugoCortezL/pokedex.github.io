@@ -20,8 +20,8 @@ export const getQtdPokemons = async () => {
     return response.count
 }
 
-export const getPokemonByName = async (name: number) => {
-    const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+export const getPokemonByName = async (name: string = "bulbasaur"):Promise<PokemonView> => {
+    const pokemon:PokemonView = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
         .then(response => response.json())
         .catch((err) => {
             console.log(err.message);

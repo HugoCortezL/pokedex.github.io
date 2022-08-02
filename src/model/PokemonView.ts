@@ -1,9 +1,9 @@
-import { Pokemon } from './Pokemon'
+import { Generic } from './Generic'
 
 export type PokemonView = {
     abilities: any[],
     base_experience: number,
-    forms: Pokemon[],
+    forms: Generic[],
     game_indicies: any[],
     height: number,
     id: number,
@@ -13,8 +13,9 @@ export type PokemonView = {
     name: string,
     order: number,
     past_types: any[],
-    species: Pokemon,
+    species: Generic,
     sprites: any,
     stats: any[],
-    types: any[]
+    types: any[],
+    weight: number
 }
