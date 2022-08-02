@@ -1,21 +1,20 @@
 import { PokemonDetailContainer, PokemonImage } from './style'
 import { useEffect, useState } from 'react'
-import { Link, useParams } from "react-router-dom";
-import { getPokemonByName } from '../../API/getPokemons'
+import { Link, Navigate, useParams } from "react-router-dom";
+import { getPokemonByName, getPreviousAndNextById } from '../../API/getPokemons'
 import { PokemonView } from '../../model/PokemonView';
 import TypeCard from '../../components/TypeCard';
 import { BackgroundColor } from '../../model/BackgroundColor';
 import Header from '../../components/Header';
 
 export default function PokemonDetail() {
-    const name = useParams().name
-    const [pokemon, setPokemon] = useState<PokemonView>({
+    const basePokemonView = {
         abilities: [],
         base_experience: 10,
         forms: [],
         game_indicies: [],
         height: 1,
-        id: 1,
+        id: 0,
         is_default: true,
         location_area_encounters: "",
         moves: [],
@@ -23,7 +22,7 @@ export default function PokemonDetail() {
         order: 1,
         past_types: [],
         species: { name: "a", url: "a" },
-        sprites: 1,
+        sprites: { front_default: "" },
         stats: [],
         types: [
             {
@@ -37,6 +36,16 @@ export default function PokemonDetail() {
 
         ],
         weight: 1
+    }
+    const name = useParams().name
+    const [pokemon, setPokemon] = useState<PokemonView>(basePokemonView)
+    type OthersPokemon = {
+        previous?: PokemonView,
+        next?: PokemonView
+    }
+    const [previousNextPokemon, setPreviousNextPokemon] = useState({
+        previous: basePokemonView,
+        next: basePokemonView
     })
 
     const getPokemon = async () => {
@@ -44,12 +53,30 @@ export default function PokemonDetail() {
         setPokemon(pokemonResult)
     }
 
+    const getOtherPokemon = async () => {
+        const othersPokemon: OthersPokemon = await getPreviousAndNextById(pokemon.id)
+        setPreviousNextPokemon(othersPokemon)
+    }
+
     useEffect(() => {
         const setPokemons = async () => {
             await getPokemon()
         }
+        const setOthersPokemons = async () => {
+            await getOtherPokemon()
+        }
         setPokemons()
-    }, []);
+        setOthersPokemons()
+    }, [name]);
+
+    useEffect(() => {
+        const setOthersPokemons = async () => {
+            await getOtherPokemon()
+        }
+        setOthersPokemons()
+    }, [pokemon])
+
+    console.log(previousNextPokemon)
 
 
     return (
@@ -57,6 +84,23 @@ export default function PokemonDetail() {
             <Link to={'/'}>
                 <Header />
             </Link>
+            <div className="previous-next">
+
+                <div className='previous'>
+                    {previousNextPokemon.previous ?
+                        <Link to={`/${previousNextPokemon.previous.name}`}>
+                            <img src={previousNextPokemon.previous.sprites.front_default} alt="" />
+                        </Link>
+                        : ""}
+                </div>
+                <div className='next'>
+                    {previousNextPokemon.next ?
+                        <Link to={`/${previousNextPokemon.next.name}`}>
+                            <img src={previousNextPokemon.next.sprites.front_default} alt="" />
+                        </Link>
+                        : ""}
+                </div>
+            </div>
             <h1>{pokemon.name}</h1>
             <div className="images">
                 <div className="images-default">

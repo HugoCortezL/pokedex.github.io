@@ -10,6 +10,22 @@ export const getAllPokemons = async (offset = 0) => {
     const pokemons = await Promise.all(response.results.map((pokemon: Generic) => fetch(pokemon.url).then(response => response.json())))
     return pokemons
 }
+type OthersPokemon = {
+    previous?: PokemonView,
+    next?: PokemonView
+}
+export const getPreviousAndNextById = async (id:number):Promise<OthersPokemon> => {
+    const previous = id - 1
+    const next = id + 1
+    const result:OthersPokemon = {}
+    if(previous > 0){
+        result.previous = await getPokemonByName(previous.toString())
+    }
+    if(next < 1155){
+        result.next = await getPokemonByName(next.toString())
+    }
+    return result
+}
 
 export const getPokemonByName = async (name: string = "bulbasaur"):Promise<PokemonView> => {
     const pokemon:PokemonView = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)

@@ -6,6 +6,7 @@ export type PokemonView = {
     forms: Generic[],
     game_indicies: any[],
     height: number,
+    sprites: any,
     id: number,
     is_default: boolean,
     location_area_encounters: string,
@@ -14,7 +15,6 @@ export type PokemonView = {
     order: number,
     past_types: any[],
     species: Generic,
-    sprites: any,
     stats: any[],
     types: any[],
     weight: number

@@ -26,9 +26,9 @@ I created this project to show my skill in fetch API and frontend
 * [X] Home Page
 * [X] Pokemon detail Page
 * [X] Infinite Scroll at Home Page
+* [X] Previus and Next pokemons in Detail Page
 * [ ] Search by name
 * [ ] Filter by types
-* [ ] Previus and Next pokemons in Detail Page
 
 <h2 id="pre">Prerequisites ✏️</h2>
  

@@ -4,6 +4,7 @@ export const PokemonDetailContainer = styled.div`
     padding: 10px;
     padding-top: 0px;
     width: 70vw;
+    position: relative;
     @media (max-width: 1000px) {
         width: 80vw;
     }
@@ -21,6 +22,27 @@ export const PokemonDetailContainer = styled.div`
     }
     p.uppercase{
         text-transform: uppercase;
+    }
+    .previous-next{
+        @media (max-width: 400px) {
+            display: none;
+        }
+        position: absolute;
+        top: 65px;
+        font-family: 'Roboto';
+        width: 100vw;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+        div{
+            min-width: 1px;
+            min-height: 1px;
+            display: flex;
+            align-items: center;
+            box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.2);
+            border-radius: 50%;
+            cursor: pointer;
+        }
     }
     .images{
         display: flex;
