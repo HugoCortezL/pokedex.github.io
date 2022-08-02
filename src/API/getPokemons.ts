@@ -1,8 +1,8 @@
 import { Generic } from "../model/Generic";
 import { PokemonView } from "../model/PokemonView";
 
-export const getAllPokemons = async () => {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
+export const getAllPokemons = async (offset = 0) => {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20}&offset=${offset}`)
         .then(response => response.json())
         .catch((err) => {
             console.log(err.message);

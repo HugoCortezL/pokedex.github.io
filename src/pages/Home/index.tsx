@@ -9,22 +9,36 @@ import PokemonCard from '../../components/PokemonCard'
 
 export default function Home() {
     const [pokemons, setPokemons] = useState<PokemonView[]>([]);
-    const [pages, setPages] = useState(0)
+    const [qtdPokemons, setQtdPokemons] = useState(0)
+    const [offset, setOffset] = useState(0)
 
     const getPokemons = async () => {
-        const pokemonsResult = await getAllPokemons()
+        const pokemonsResult:PokemonView[] = await getAllPokemons(offset)
         console.log(pokemonsResult)
-        setPokemons(pokemonsResult)
+        setPokemons([...pokemons, ...pokemonsResult]) 
     }
 
     useEffect(() => {
         const setPokemons = async () => {
             await getPokemons()
-            const qtdPokemons = await getQtdPokemons()
-            setPages(Math.ceil(qtdPokemons / 20))
+            setQtdPokemons( await getQtdPokemons())
         }
         setPokemons()
-    }, []);
+        //document.getElementById("see-more")?.addEventListener("scroll", infiniteScroll)
+    }, [offset]);
+
+    const handlerSeeMore = (event: Event ) => {
+        event.preventDefault()
+        setOffset(offset + 20)
+    }
+
+    /*const infiniteScroll = () => {
+        /*if (window.innerHeight + document.documentElement.scrollTop
+            === document.documentElement.offsetHeight){
+                console.log("Chgou ao fim")
+            }
+        console.log(listInnerRef.current)
+    }*/
 
 
     return (
@@ -34,8 +48,11 @@ export default function Home() {
                 <FilterContainer />
                 <div className="right">
                     <SearchBar />
-                    <PokemonsContainer>
+                    <PokemonsContainer id="see-more">
                         {pokemons.map(pokemon => <PokemonCard pokemon={pokemon} key={pokemon.id} />)}
+                        <button onClick={() => handlerSeeMore(event)}>
+                            <PokemonCard/>
+                        </button>
                     </PokemonsContainer>
                 </div>
             </Content>
