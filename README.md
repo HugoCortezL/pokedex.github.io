@@ -23,6 +23,11 @@ I created this project to show my skill in fetch API and frontend
 
 * [ ] Responsiveness
 * [ ] Aniamtion
+* [ ] Home Page
+* [ ] Pokemon detail Page
+* [X] Infinite Scroll at Home Page
+* [ ] Search by name
+* [ ] Filter by types
 
 <h2 id="pre">Prerequisites ✏️</h2>
  
